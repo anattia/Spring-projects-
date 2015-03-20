@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+    
+    <http auto-config="true" access-denied-page="/Admin/AccessDenied">
+        <logout logout-success-url="/login" invalidate-session="true" logout-url="/logout" 
+                    delete-cookies="JSESSIONID" />
+        <intercept-url pattern="/Admin**" access="ROLE_ADMIN"  requires-channel="any"/>
+        <intercept-url pattern="/Admin/**" access="ROLE_ADMIN"  requires-channel="any"/>
+        <intercept-url pattern="/Topics/CreateTopics" access="ROLE_USER, ROLE_ADMIN"  requires-channel="any"/>
+        <form-login login-page="/login"/>
+    
+    </http>
+    
+    <authentication-manager>
+        <authentication-provider>
+            <jdbc-user-service data-source-ref="DerbyDatasource"
+                               users-by-username-query  ="SELECT * from users where username= ? " 
+                               authorities-by-username-query ="SELECT username,authority FROM authorities
+                                                                WHERE username = ?"
+            
+            />
+            
+        </authentication-provider>
+    </authentication-manager>
+</beans:beans>
