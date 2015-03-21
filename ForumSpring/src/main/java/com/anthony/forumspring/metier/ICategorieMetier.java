@@ -21,5 +21,7 @@ public interface ICategorieMetier {
     public Boolean existeCategorie(String Nom);
     
     public void UpdateNbCommentaireByCategorie(int cat_id);
+    
+    public List<Categorie> findNamebyId(int cat_id);
 
 }

@@ -52,8 +52,8 @@ public class CommentController {
         //Insertion du commentaire dans la base de données
         IcD.InsertNewCommentaire(com);
         
-        //Mise a jour de la date du dernier commentaire
-        topic.UpdateNumberTopics(com.getTopic_id());
+        //Mise du nombre de topics à la catégorie, incrémenté de 1 a chaque fois
+       // topic.UpdateNumberTopics(com.getTopic_id());
         
         //Mise a jour de l'auteur du dernier message
         topic.UpdateUsernameLastComment(com.getTopic_id(),com.getUsername());

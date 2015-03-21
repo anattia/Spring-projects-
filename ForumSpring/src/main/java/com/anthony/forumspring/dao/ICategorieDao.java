@@ -13,8 +13,14 @@ import java.util.List;
  * @author anthony
  */
 public interface ICategorieDao {
+
     public List<Categorie> findAllC();
+
     public void InsertCategorie(String nom);
+
     public Boolean existeCategorie(String Nom);
+
     public void UpdateNbCommentaireByCategorie(int cat_id);
+
+    public List<Categorie> findNamebyId(int cat_id);
 }

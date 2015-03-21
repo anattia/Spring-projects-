@@ -40,4 +40,8 @@ public class CategorieMetier implements ICategorieMetier {
     public void UpdateNbCommentaireByCategorie(int cat_id){
         cat.UpdateNbCommentaireByCategorie(cat_id);
     }
+    @Override
+    public List<Categorie> findNamebyId(int cat_id){
+        return cat.findNamebyId(cat_id);
+    }
 }

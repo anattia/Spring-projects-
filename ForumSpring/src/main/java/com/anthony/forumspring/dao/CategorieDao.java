@@ -47,10 +47,18 @@ public class CategorieDao implements ICategorieDao {
         jdbcTemplate.update(sql, new Object[]{nom, 0, 0});
 
     }
+
     @Override
-    public void UpdateNbCommentaireByCategorie(int cat_id){
+    public void UpdateNbCommentaireByCategorie(int cat_id) {
         String sql = "UPDATE categorie set cat_nombre_commentaire = cat_nombre_commentaire + 1 where cat_id = ?";
         jdbcTemplate.update(sql, new Object[]{cat_id});
+    }
+
+    @Override
+    public List<Categorie> findNamebyId(int cat_id) {
+        String sql = "SELECT cat_nom FROM CATEGORIE WHERE cat_id = " + cat_id;
+
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper(Categorie.class));
     }
 
 }

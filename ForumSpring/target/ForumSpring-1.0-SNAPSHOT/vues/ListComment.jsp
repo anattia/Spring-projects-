@@ -23,8 +23,8 @@
     </head>
     <body>
         <sql:setDataSource var="snapshot" driver="org.apache.derby.jdbc.ClientDriver"
-                           url="jdbc:derby://localhost:1527/ForumGestion"
-                           user="forum"  password="forum"/>
+                           url="jdbc:derby://localhost:1527/FORUMSPRING"
+                           user="FORUMSPRING"  password="FORUMSPRING"/>
 
 
 
@@ -340,7 +340,7 @@
                                 </c:if>
                             </div>
                             <div class="tab-pane" id="add-comment">
-                                <sec:authorize ifAllGranted="ROLE_USER">
+                                <sec:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
                                     <form action="/ForumSpring/AddComment" method="post" class="form-horizontal" id="commentForm" role="form"> 
 
                                         <input type="hidden" class="form-control" name="username" value="<sec:authentication property="principal.username"/>" id="uploadMedia">

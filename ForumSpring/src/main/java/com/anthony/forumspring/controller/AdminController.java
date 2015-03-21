@@ -204,20 +204,37 @@ public class AdminController {
     public ModelAndView viewTopics() {
 
         List<Topics> to = topic.findAllByValidation();
-       
+
         ModelAndView mav = new ModelAndView();
         mav.addObject("topics", "");
         mav.addObject("ListTopics", to);
         mav.setViewName("ValidateTopics");
         return mav;
     }
+
+    @RequestMapping(value = "/Admin/ListeAllTopics", method = RequestMethod.GET)
+    public ModelAndView viewAllTopics() {
+
+        List<Topics> to = topic.findAll();
+
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("topics", "");
+        mav.addObject("ListTopics", to);
+        mav.setViewName("AdminAllTopics");
+        return mav;
+    }
+
     /**
-    **/
+     *
+     * @param topic_id
+     * @param action
+     * @return
+     */
     @RequestMapping(value = "/Admin/ListeTopicsValidate", method = RequestMethod.GET)
     public ModelAndView validateTopics(@RequestParam("idTopic") String topic_id,
-            @RequestParam("action") String action) {
+            @RequestParam("action") String action, @RequestParam(value = "redirect", required = false) String page) {
         ModelAndView mav = new ModelAndView();
-       //Integer.parseInt(idTopic); 
+        //Integer.parseInt(idTopic); 
         switch (action) {
             case "valider":
 
@@ -233,11 +250,21 @@ public class AdminController {
                 mav.addObject("Success_public", "Le fils de discussion à subit un changement de type et est passé en public ");
                 break;
         }
-        List< Topics> to = topic.findAllByValidation();
 
-        mav.addObject("ListTopics", to);
-        mav.setViewName("ValidateTopics");
+        if (page != null) {
+            mav.setViewName("AdminAllTopics");
+            System.err.println("je suis pas null");
+            List< Topics> to = topic.findAll();
+
+            mav.addObject("ListTopics", to);
+        } else {
+            mav.setViewName("ValidateTopics");
+            System.err.println("je suis  null");
+            List< Topics> to = topic.findAllByValidation();
+
+            mav.addObject("ListTopics", to);
+        }
         return mav;
-    } 
+    }
 
 }
